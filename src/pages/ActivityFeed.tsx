@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { getActivities } from '../services/requests';
 import { Activity } from '../services/types';
 import ActivityCard from '../components/ActivityCard';
-import { List } from '@mui/material';
 
 export default function ActivityFeed() {
   const [activities, setActivities] = useState<Activity[] | undefined>(
@@ -19,14 +18,14 @@ export default function ActivityFeed() {
   }, []);
 
   return (
-    <div>
+    <div className='shared-container-style'>
       <h2>Activity Feed page</h2>
-      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+      <ul>
         {activities &&
           activities.map((activity) => (
             <ActivityCard key={activity.id} activity={activity} />
           ))}
-      </List>
+      </ul>
     </div>
   );
 }

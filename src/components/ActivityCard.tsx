@@ -1,4 +1,3 @@
-import { ListItem, ListItemAvatar } from '@mui/material';
 import { Activity } from '../services/types';
 import { useNavigate } from 'react-router-dom';
 import CallMadeIcon from '@mui/icons-material/CallMade';
@@ -18,10 +17,8 @@ export default function ActivityCard({
     navigate(`/${id}`, { state: { activity } });
   };
   return (
-    <ListItem onClick={handleOnclick}>
-      <ListItemAvatar>
-        {direction === 'outbound' ? <CallMadeIcon /> : <CallReceivedIcon />}
-      </ListItemAvatar>
-    </ListItem>
+    <li onClick={handleOnclick}>
+      {direction === 'outbound' ? <CallMadeIcon /> : <CallReceivedIcon />}
+    </li>
   );
 }

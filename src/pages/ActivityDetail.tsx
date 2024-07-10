@@ -7,9 +7,11 @@ export default function ActivityDetail() {
     },
   } = useLocation();
   return (
-    <div>
+    <div className='shared-container-style '>
       <h2>Activity Detail page</h2>
       <p>call_type</p>
+      <p>call_type</p>
+      <button></button>
     </div>
   );
 }
