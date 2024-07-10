@@ -21,13 +21,17 @@ export default function Footer() {
         className={`shared-icon-style ${
           context?.selectedOption === 'inbound' && 'text-color-accent'
         }`}
-        onClick={() => handleSelectOption('inbound')}
+        onClick={() =>
+          location.pathname === '/' && handleSelectOption('inbound')
+        }
       />
       <BsTelephoneOutbound
         className={`shared-icon-style ${
           context?.selectedOption === 'outbound' && 'text-color-accent'
         }`}
-        onClick={() => handleSelectOption('outbound')}
+        onClick={() =>
+          location.pathname === '/' && handleSelectOption('outbound')
+        }
       />
       <Link to='/archive'>
         <MdSdStorage

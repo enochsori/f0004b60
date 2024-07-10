@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { TbActivityHeartbeat } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 import { ActivityContext } from '../context/ActivityContext';
+import PopupButton from '../components/PopupButton';
 
 export default function ArchiveFeed() {
   const context = useContext(ActivityContext);
@@ -11,11 +12,13 @@ export default function ArchiveFeed() {
   }, []);
 
   return (
-    <div className='shared-container-style'>
-      <h2>Archive feed</h2>
-      <Link to='/'>
-        <TbActivityHeartbeat className='hover:scale-105 hover:text-color-accent-second' />
-      </Link>
+    <div className='shared-container-style  flex flex-col justify-between'>
+      <div>
+        <h2>Archive feed</h2>
+      </div>
+      <div className='relative'>
+        <PopupButton />
+      </div>
     </div>
   );
 }
