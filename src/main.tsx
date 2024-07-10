@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import NotFound from './pages/NotFound.tsx';
 import ActivityFeed from './pages/ActivityFeed.tsx';
 import ActivityDetail from './pages/ActivityDetail.tsx';
+import ArchiveFeed from './pages/ArchiveFeed.tsx';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: '/:id',
         element: <ActivityDetail />,
+      },
+      {
+        path: '/archive',
+        element: <ArchiveFeed />,
       },
     ],
   },

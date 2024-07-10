@@ -1,4 +1,5 @@
-import { useLocation } from 'react-router-dom';
+import { TbActivityHeartbeat } from 'react-icons/tb';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function ActivityDetail() {
   const {
@@ -7,11 +8,12 @@ export default function ActivityDetail() {
     },
   } = useLocation();
   return (
-    <div className='shared-container-style '>
-      <h2>Activity Detail page</h2>
+    <div className='shared-container-style'>
       <p>call_type</p>
       <p>call_type</p>
-      <button></button>
+      <Link to='/'>
+        <TbActivityHeartbeat className='hover:scale-105 hover:text-color-accent-second' />
+      </Link>
     </div>
   );
 }
