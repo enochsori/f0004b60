@@ -26,7 +26,9 @@ export default function ActivityFeed() {
 
   // context for filter
   const context = useContext(ActivityContext);
-  context?.setSelectedOption('all');
+  useEffect(() => {
+    context?.setSelectedOption('all');
+  }, []);
 
   // filtered activities based on selected option
   useEffect(() => {

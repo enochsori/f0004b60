@@ -16,10 +16,13 @@ export default function Footer() {
 
   // filter handler
   const handleSelectOption = (type: 'inbound' | 'outbound') => {
+    console.log('hello');
     context?.selectedOption === type
       ? context?.setSelectedOption('all')
       : context?.setSelectedOption(type);
   };
+
+  console.log(location.pathname);
 
   // defined shared class name
   const classNames =

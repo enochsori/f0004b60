@@ -25,7 +25,9 @@ export default function ArchiveFeed() {
   >(undefined);
 
   const context = useContext(ActivityContext);
-  context?.setSelectedOption('all');
+  useEffect(() => {
+    context?.setSelectedOption('all');
+  }, []);
 
   // set Filtered activities based on is_archived
   useEffect(() => {

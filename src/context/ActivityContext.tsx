@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useEffect, useState } from 'react';
 
 interface ActivityContextProps {
   selectedOption: 'all' | 'inbound' | 'outbound';
@@ -19,6 +19,10 @@ export const ActivityProvider = ({ children }: ActivityProviderProp) => {
   const [selectedOption, setSelectedOption] = useState<
     'all' | 'inbound' | 'outbound'
   >('all');
+
+  useEffect(() => {
+    console.log(selectedOption);
+  });
 
   return (
     <ActivityContext.Provider value={{ selectedOption, setSelectedOption }}>
