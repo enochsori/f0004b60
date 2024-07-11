@@ -20,8 +20,8 @@ export default function Footer() {
   };
 
   const classNames =
-    location.pathname !== '/archive'
-      ? 'hover:scale-110 hover:text-color-accent'
+    location.pathname === '/'
+      ? 'hover:scale-110 hover:text-color-accent hover:cursor-pointer'
       : 'opacity-50';
   return (
     <footer className='w-full h-[60px]  rounded-b-lg dark:bg-bg-dark-dark border-t dark:border-color-dark-grey border-color-light-grey flex items-center justify-between text-2xl px-8 dark:text-color-text-dark'>
@@ -50,7 +50,7 @@ export default function Footer() {
       </Link>
 
       <div
-        className='hover:cursor-pointer hover:scale-125'
+        className='hover:cursor-pointer hover:scale-125 hover:cur'
         onClick={darkModeContext?.toggleDarkMode}
       >
         {darkModeContext?.darkMode ? <MdOutlineLightMode /> : <MdDarkMode />}

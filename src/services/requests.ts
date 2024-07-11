@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import useActivity from '../hooks/useActivity';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -18,7 +19,7 @@ export const getCallDetail = async (call_id: string) => {
 };
 
 // patch to archive a call with call_id
-export const patchArchiveCall = async (call_id: string) => {
+export const patchArchiveCall = async (call_id: string): Promise<void> => {
   const updatedField = { is_archived: true };
   try {
     const res = await axios.patch(
@@ -37,7 +38,20 @@ export const patchArchiveCall = async (call_id: string) => {
   }
 };
 
-export const patchArchiveAllCalls = (...call_id: string[]) => {};
+export const patchArchiveAllCalls = async (
+  call_ids: string[]
+): Promise<void> => {
+  const patchRequests = call_ids?.map((call_id) => patchArchiveCall(call_id));
+
+  try {
+    const responses = await Promise.all(patchRequests);
+    responses.forEach((res) => {
+      console.log('Response:', res);
+    });
+  } catch (error) {
+    console.error('Error in patch requests', error);
+  }
+};
 
 export const patchResetAllCalls = async () => {
   console.log('called to reset all calls');

@@ -16,12 +16,17 @@ export default function ActivityFeed() {
   const [filteredActivities, setFilteredActivities] = useState<
     Activity[] | undefined
   >(undefined);
+  const [call_ids, setCall_ids] = useState<string[] | undefined>();
 
   useEffect(() => {
     context?.setSelectedOption('all');
   }, []);
 
   useEffect(() => {
+    // make a array with call_ids
+    setCall_ids(activities?.map((activity) => activity.id));
+
+    // filtered activities based on selected option
     switch (context?.selectedOption) {
       case 'all':
         setFilteredActivities(
@@ -65,7 +70,7 @@ export default function ActivityFeed() {
       </section>
 
       <section className='relative'>
-        <PopupButton />
+        <PopupButton call_ids={call_ids} />
       </section>
     </div>
   );

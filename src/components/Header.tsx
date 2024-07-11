@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { TbActivityHeartbeat } from 'react-icons/tb';
 import { TbListDetails } from 'react-icons/tb';
-import { useLocation } from 'react-router-dom';
+import { MdInfoOutline } from 'react-icons/md';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { MdSdStorage } from 'react-icons/md';
 
 export default function Header() {
   const [currentPage, setCurrentPage] = useState<'AF' | 'AD' | 'Arch.'>('AF');
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (location.pathname === '/') {
@@ -20,7 +22,7 @@ export default function Header() {
 
   return (
     <header className='h-[60px] p-2 dark:bg-bg-dark-dark bg-bg-light-dark rounded-t-md px-4 border-b dark:border-color-dark-grey border-color-light-grey flex justify-between'>
-      <div>
+      <div className='hover:cursor-pointer' onClick={() => navigate('/')}>
         <svg
           className=''
           height='45px'
@@ -90,7 +92,7 @@ export default function Header() {
         )}
 
         {currentPage === 'AD' && (
-          <TbListDetails className='text-color-accent-second text-lg' />
+          <MdInfoOutline className='text-color-accent-second text-lg' />
         )}
 
         {currentPage !== 'AD' && currentPage !== 'AF' && (

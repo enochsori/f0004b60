@@ -1,4 +1,10 @@
-import { Button, CircularProgress } from '@mui/material';
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Modal,
+  Typography,
+} from '@mui/material';
 import PopupButton from '../components/PopupButton';
 import { BsTelephoneInbound } from 'react-icons/bs';
 import { BsTelephoneOutbound } from 'react-icons/bs';
@@ -6,6 +12,19 @@ import { formatDate } from '../services/dateFormatHook';
 import useActivity from '../hooks/useActivity';
 import { patchArchiveCall } from '../services/requests';
 import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 export default function ActivityDetail() {
   const location = useLocation();
@@ -13,6 +32,15 @@ export default function ActivityDetail() {
   const {
     callDetailQuery: { isLoading, error, data: activity },
   } = useActivity(location.pathname.replace('/', ''));
+
+  const [open, setOpen] = useState(false);
+
+  const handleModalOpen = () => setOpen(true);
+  const handleModalClose = () => setOpen(false);
+
+  const handleArchiveCall = () => {
+    patchArchiveCall(activity.id);
+  };
 
   return (
     <div className='shared-container-style flex flex-col justify-between'>
@@ -76,10 +104,7 @@ export default function ActivityDetail() {
                   <span className='text-color-accent'>Archived</span>
                 )}
                 {activity.is_archived || (
-                  <Button
-                    onClick={() => patchArchiveCall(activity.id)}
-                    variant='contained'
-                  >
+                  <Button onClick={handleModalOpen} variant='contained'>
                     Archive
                   </Button>
                 )}
@@ -90,6 +115,25 @@ export default function ActivityDetail() {
           <section className='relative'>
             <PopupButton />
           </section>
+
+          <Modal
+            open={open}
+            onClose={handleModalClose}
+            aria-labelledby='modal-modal-title'
+            aria-describedby='modal-modal-description'
+          >
+            <Box sx={style}>
+              <Typography id='modal-modal-title' variant='h6' component='h2'>
+                Text in a modal
+              </Typography>
+              <Typography id='modal-modal-description' sx={{ mt: 2 }}>
+                Do you want to save this call into archive?
+              </Typography>
+              <Button variant='outlined' onClick={handleArchiveCall}>
+                Outlined
+              </Button>
+            </Box>
+          </Modal>
         </>
       )}
     </div>
