@@ -20,10 +20,6 @@ export const ActivityProvider = ({ children }: ActivityProviderProp) => {
     'all' | 'inbound' | 'outbound'
   >('all');
 
-  useEffect(() => {
-    console.log(selectedOption);
-  });
-
   return (
     <ActivityContext.Provider value={{ selectedOption, setSelectedOption }}>
       {children}
