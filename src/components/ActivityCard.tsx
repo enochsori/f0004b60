@@ -1,11 +1,10 @@
 import { Activity } from '../services/types';
 import { useNavigate } from 'react-router-dom';
+import { formatDate } from '../services/dateFormatHook';
 
 import { HiOutlineEllipsisVertical } from 'react-icons/hi2';
-import { formatDate } from '../services/dateFormatHook';
 import { BsTelephoneInbound } from 'react-icons/bs';
 import { BsTelephoneOutbound } from 'react-icons/bs';
-
 import { MdInfoOutline } from 'react-icons/md';
 
 type Prop = {
@@ -17,11 +16,11 @@ export default function ActivityCard({
 }: Prop) {
   const navigate = useNavigate();
 
+  // Navigate handler with call_id
   const handleOnclick = () => {
     navigate(`/${id}`);
   };
 
-  const formatted_at = formatDate(created_at);
   return (
     <li className='w-full h-14 mt-2 hover:dark:bg-bg-dark-dark hover:bg-bg-light-dark  px-4 rounded-sm'>
       <div className='h-full border-b border-color-light-grey flex items-center justify-between '>
@@ -38,13 +37,11 @@ export default function ActivityCard({
             )}
             <span>+{from}</span>
           </div>
-
-          {/* add modal here */}
         </div>
 
         <div className='flex items-center gap-2 text-color-dark-grey'>
           <HiOutlineEllipsisVertical />
-          <span className='text-sm'>{formatted_at}</span>
+          <span className='text-sm'>{formatDate(created_at)}</span>
           <div onClick={handleOnclick} className='flex items-center'>
             <MdInfoOutline className='text-2xl font-bold text-color-accent-second hover:opacity-100 opacity-60 hover:cursor-pointer' />
           </div>

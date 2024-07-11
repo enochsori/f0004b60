@@ -1,24 +1,27 @@
 import { useContext } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { ActivityContext } from '../context/ActivityContext';
+import { DarkModeContext } from '../context/DarkModeContext';
+
 import { BsTelephoneInbound } from 'react-icons/bs';
 import { BsTelephoneOutbound } from 'react-icons/bs';
 import { MdSdStorage } from 'react-icons/md';
-import { Link, useLocation } from 'react-router-dom';
-import { ActivityContext } from '../context/ActivityContext';
 import { MdDarkMode } from 'react-icons/md';
 import { MdOutlineLightMode } from 'react-icons/md';
-import { DarkModeContext } from '../context/DarkModeContext';
 
 export default function Footer() {
   const location = useLocation();
   const context = useContext(ActivityContext);
   const darkModeContext = useContext(DarkModeContext);
 
+  // filter handler
   const handleSelectOption = (type: 'inbound' | 'outbound') => {
     context?.selectedOption === type
       ? context?.setSelectedOption('all')
       : context?.setSelectedOption(type);
   };
 
+  // defined shared class name
   const classNames =
     location.pathname === '/'
       ? 'hover:scale-110 hover:text-color-accent hover:cursor-pointer'
