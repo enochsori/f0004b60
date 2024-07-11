@@ -2,31 +2,34 @@ import ActivityCard from '../components/ActivityCard';
 import CircularProgress from '@mui/material/CircularProgress';
 import { ActivityContext } from '../context/ActivityContext';
 import { useContext, useEffect, useState } from 'react';
-
-import useActivity from '../hooks/useActivity';
+import { getActivities } from '../services/requests';
+import { useQuery } from '@tanstack/react-query';
 import { Activity } from '../services/types';
+
 import PopupButton from '../components/PopupButton';
 
 export default function ActivityFeed() {
+  // fetch activities via react useQuery
   const {
-    activityQuery: { isLoading, error, data: activities },
-  } = useActivity();
+    isLoading,
+    error,
+    data: activities,
+  } = useQuery({
+    queryKey: ['activities'],
+    queryFn: getActivities,
+    staleTime: 6000,
+  });
 
-  const context = useContext(ActivityContext);
   const [filteredActivities, setFilteredActivities] = useState<
     Activity[] | undefined
   >(undefined);
-  const [call_ids, setCall_ids] = useState<string[] | undefined>();
 
+  // context for filter
+  const context = useContext(ActivityContext);
+  context?.setSelectedOption('all');
+
+  // filtered activities based on selected option
   useEffect(() => {
-    context?.setSelectedOption('all');
-  }, []);
-
-  useEffect(() => {
-    // make a array with call_ids
-    setCall_ids(activities?.map((activity) => activity.id));
-
-    // filtered activities based on selected option
     switch (context?.selectedOption) {
       case 'all':
         setFilteredActivities(
@@ -50,7 +53,7 @@ export default function ActivityFeed() {
         );
         break;
     }
-  }, [context?.selectedOption, activities]);
+  }, [activities, context?.selectedOption]);
 
   return (
     <div className='shared-container-style flex flex-col justify-between'>
@@ -61,17 +64,21 @@ export default function ActivityFeed() {
           </div>
         )}
         {error && <p>{error.message}</p>}
-        <ul>
-          {filteredActivities &&
-            filteredActivities.map((activity) => (
-              <ActivityCard key={activity.id} activity={activity} />
+
+        {filteredActivities && (
+          <ul>
+            {filteredActivities.map((act) => (
+              <ActivityCard key={act.id} activity={act} />
             ))}
-        </ul>
+          </ul>
+        )}
       </section>
 
-      <section className='relative'>
-        <PopupButton call_ids={call_ids} />
-      </section>
+      {activities && (
+        <section className='relative'>
+          <PopupButton call_ids={activities.map((activity) => activity.id)} />
+        </section>
+      )}
     </div>
   );
 }

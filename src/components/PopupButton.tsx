@@ -1,18 +1,19 @@
+import { useLocation, useNavigate } from 'react-router-dom';
+
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
 import { TbActivityHeartbeat } from 'react-icons/tb';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { MdLockReset } from 'react-icons/md';
-import { patchArchiveAllCalls, patchResetAllCalls } from '../services/requests';
-import { MdSdStorage } from 'react-icons/md';
 import { CiSaveUp1 } from 'react-icons/ci';
+import useActivityMutations from '../hooks/useActivity';
 
 interface Prop {
   call_ids?: string[];
 }
-
 export default function PopupButton({ call_ids }: Prop) {
   const navigate = useNavigate();
   const location = useLocation();
+  const { archiveAllCallsMutation, resetAllCallsMutation } =
+    useActivityMutations();
 
   const actions =
     location.pathname === '/archive'
@@ -44,13 +45,15 @@ export default function PopupButton({ call_ids }: Prop) {
           },
         ];
 
+  // fn handlers
   const handleOnClick = (index: number) => {
     if (location.pathname === '/') {
-      call_ids && patchArchiveAllCalls(call_ids);
+      call_ids && archiveAllCallsMutation.mutate(call_ids);
     } else if (location.pathname === '/archive') {
-      index === 0 ? navigate('/') : patchResetAllCalls();
+      index === 0 ? navigate('/') : resetAllCallsMutation.mutate();
     } else {
       navigate('/');
+      1;
     }
   };
 

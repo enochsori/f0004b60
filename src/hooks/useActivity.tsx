@@ -1,19 +1,37 @@
-import { useQuery } from '@tanstack/react-query';
-import { Activity } from '../services/types';
-import { getActivities, getCallDetail } from '../services/requests';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  patchArchiveAllCalls,
+  patchArchiveCall,
+  patchResetAllCalls,
+} from '../services/requests';
 
-export default function useActivity(call_id = 'n/a') {
-  //   const queryClient = useQueryClient();
+export default function useActivityMutations() {
+  const queryClient = useQueryClient();
 
-  const activityQuery = useQuery<Activity[]>({
-    queryKey: ['activity'],
-    queryFn: getActivities,
+  const archiveAllCallsMutation = useMutation({
+    mutationFn: (call_ids: string[]) => patchArchiveAllCalls(call_ids),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['activities'] });
+    },
   });
 
-  const callDetailQuery = useQuery({
-    queryKey: ['callDetail'],
-    queryFn: () => getCallDetail(call_id),
+  const resetAllCallsMutation = useMutation({
+    mutationFn: patchResetAllCalls,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['activities'] });
+    },
   });
 
-  return { activityQuery, callDetailQuery };
+  const archiveACallMutation = useMutation({
+    mutationFn: (call_id: string) => patchArchiveCall(call_id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['activityDetail'] });
+    },
+  });
+
+  return {
+    archiveAllCallsMutation,
+    resetAllCallsMutation,
+    archiveACallMutation,
+  };
 }

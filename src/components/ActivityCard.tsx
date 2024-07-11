@@ -21,18 +21,11 @@ export default function ActivityCard({
     navigate(`/${id}`);
   };
 
-  const handleCall = () => {
-    console.log('call to', from);
-  };
-
   const formatted_at = formatDate(created_at);
   return (
     <li className='w-full h-14 mt-2 hover:dark:bg-bg-dark-dark hover:bg-bg-light-dark  px-4 rounded-sm'>
       <div className='h-full border-b border-color-light-grey flex items-center justify-between '>
-        <div
-          className='flex-1 flex items-center justify-between hover:cursor-pointer'
-          onClick={handleCall}
-        >
+        <div className='flex-1 flex items-center justify-between'>
           <div className='flex gap-4 items-center '>
             {direction === 'outbound' ? (
               <BsTelephoneOutbound className='text-sm' />

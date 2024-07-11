@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { TbActivityHeartbeat } from 'react-icons/tb';
-import { TbListDetails } from 'react-icons/tb';
-import { MdInfoOutline } from 'react-icons/md';
 import { useLocation, useNavigate } from 'react-router-dom';
+
+import { TbActivityHeartbeat } from 'react-icons/tb';
+import { MdInfoOutline } from 'react-icons/md';
 import { MdSdStorage } from 'react-icons/md';
 
 export default function Header() {
