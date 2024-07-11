@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -12,7 +13,6 @@ export default {
         'bg-light-light': '#fdfffd',
         'color-dark-grey': '#4e4e4e',
         'color-light-grey': '#d1d1d1',
-
         'color-text-light': '#22243b',
         'color-text-dark': '#fdfffd',
         'color-accent': '#f16e03',
@@ -30,7 +30,7 @@ export default {
     function ({ addUtilities }) {
       const newUtilities = {
         '.shared-container-style': {
-          '@apply w-full h-full min-h-0 dark:bg-bg-dark-light dark:text-color-text-dark p-4':
+          '@apply w-full h-full min-h-0 dark:bg-bg-dark-light dark:text-color-text-dark py-4 px-2':
             {},
         },
         '.shared-icon-style': {

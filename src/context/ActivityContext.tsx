@@ -1,10 +1,4 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, ReactNode, useState } from 'react';
 
 interface ActivityContextProps {
   selectedOption: 'all' | 'inbound' | 'outbound';

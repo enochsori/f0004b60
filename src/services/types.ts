@@ -1,7 +1,7 @@
 export type Activity = {
-  call_type: 'outbound' | 'inbound';
+  call_type: 'missed' | 'answered' | 'voicemail';
   created_at: Date;
-  direction: string;
+  direction: 'outbound' | 'inbound';
   duration: number;
   from: number;
   id: string;
@@ -9,3 +9,12 @@ export type Activity = {
   to: number;
   via: number;
 };
+
+export interface ArchiveCall {
+  is_archived: boolean;
+}
+
+export interface DarkModeContextType {
+  darkMode: boolean;
+  toggleDarkMode: () => void;
+}
