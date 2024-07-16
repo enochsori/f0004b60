@@ -58,7 +58,7 @@ export default function ActivityFeed() {
   }, [activities, context?.selectedOption]);
 
   return (
-    <div className='shared-container-style flex flex-col justify-between'>
+    <div className='shared-container-style flex flex-col justify-between overflow-hidden'>
       <section>
         {isLoading && (
           <div className='mt-6 text-center '>
