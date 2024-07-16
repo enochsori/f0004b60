@@ -8,6 +8,7 @@ import { BsTelephoneOutbound } from 'react-icons/bs';
 import { MdSdStorage } from 'react-icons/md';
 import { MdDarkMode } from 'react-icons/md';
 import { MdOutlineLightMode } from 'react-icons/md';
+import PopupButton from './PopupButton';
 
 export default function Footer() {
   const location = useLocation();
@@ -29,7 +30,7 @@ export default function Footer() {
       ? 'hover:scale-110 hover:text-color-accent hover:cursor-pointer'
       : 'opacity-50';
   return (
-    <footer className='w-full h-[60px]  rounded-b-lg dark:bg-bg-dark-dark border-t dark:border-color-dark-grey border-color-light-grey flex items-center justify-between text-2xl px-8 dark:text-color-text-dark'>
+    <footer className='w-full h-[60px]  rounded-b-lg dark:bg-bg-dark-dark border-t dark:border-color-dark-grey border-color-light-grey flex items-center justify-between text-2xl px-8 dark:text-color-text-dark relative'>
       <BsTelephoneInbound
         className={`${classNames} ${
           context?.selectedOption === 'inbound' && 'text-color-accent'
@@ -59,6 +60,10 @@ export default function Footer() {
         onClick={darkModeContext?.toggleDarkMode}
       >
         {darkModeContext?.darkMode ? <MdOutlineLightMode /> : <MdDarkMode />}
+      </div>
+
+      <div className=' absolute bottom-16 right-2'>
+        <PopupButton />
       </div>
     </footer>
   );

@@ -127,10 +127,6 @@ export default function ActivityDetail() {
             </div>
           </section>
 
-          <section className='relative'>
-            <PopupButton />
-          </section>
-
           <Modal
             open={open}
             onClose={handleModalClose}

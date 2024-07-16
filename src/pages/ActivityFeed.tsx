@@ -6,8 +6,6 @@ import { getActivities } from '../services/requests';
 import { useQuery } from '@tanstack/react-query';
 import { Activity } from '../services/types';
 
-import PopupButton from '../components/PopupButton';
-
 export default function ActivityFeed() {
   // fetch activities via react useQuery
   const {
@@ -58,7 +56,7 @@ export default function ActivityFeed() {
   }, [activities, context?.selectedOption]);
 
   return (
-    <div className='shared-container-style flex flex-col justify-between overflow-hidden'>
+    <div className='h-full after:shared-container-style flex flex-col justify-between overflow-auto hide-scrollbar relative'>
       <section>
         {isLoading && (
           <div className='mt-6 text-center '>
@@ -75,12 +73,6 @@ export default function ActivityFeed() {
           </ul>
         )}
       </section>
-
-      {activities && (
-        <section className='relative'>
-          <PopupButton call_ids={activities.map((activity) => activity.id)} />
-        </section>
-      )}
     </div>
   );
 }

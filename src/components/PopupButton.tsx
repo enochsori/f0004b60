@@ -1,15 +1,22 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import useActivityMutations from '../hooks/useActivity';
+import { useQuery } from '@tanstack/react-query';
+import { getActivities } from '../services/requests';
 
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
 import { TbActivityHeartbeat } from 'react-icons/tb';
 import { MdLockReset } from 'react-icons/md';
 import { CiSaveUp1 } from 'react-icons/ci';
 
-interface Prop {
-  call_ids?: string[];
-}
-export default function PopupButton({ call_ids }: Prop) {
+export default function PopupButton() {
+  // fetch activities via react useQuery
+  const { data: activities } = useQuery({
+    queryKey: ['activities'],
+    queryFn: getActivities,
+    staleTime: 6000,
+  });
+  const call_ids = activities?.map((activity) => activity.id);
+
   const navigate = useNavigate();
   const location = useLocation();
   const { archiveAllCallsMutation, resetAllCallsMutation } =
@@ -58,10 +65,10 @@ export default function PopupButton({ call_ids }: Prop) {
   };
 
   return (
-    <div className='absolute bottom-0 right-0 opacity-30 hover:opacity-100'>
+    <div className='opacity-30 hover:opacity-100'>
       <SpeedDial
         ariaLabel='SpeedDial basic example'
-        sx={{ position: 'absolute', bottom: 16, right: 16 }}
+        // sx={{ position: 'absolute', bottom: 16, right: 16 }}
         icon={<SpeedDialIcon />}
       >
         {actions.map((action, index) => (

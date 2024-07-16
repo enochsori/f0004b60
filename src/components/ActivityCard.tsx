@@ -23,23 +23,27 @@ export default function ActivityCard({
 
   return (
     <li className='w-full h-14 mt-2 hover:dark:bg-bg-dark-dark hover:bg-bg-light-dark  px-4 rounded-sm'>
-      <div className='h-full border-b border-color-light-grey flex items-center justify-between '>
+      <div className='h-full border-b border-color-light-grey flex '>
         <div className='flex-1 flex items-center justify-between'>
           <div className='flex gap-4 items-center '>
             {direction === 'outbound' ? (
-              <BsTelephoneOutbound className='text-sm' />
+              <BsTelephoneOutbound className='text-sm dark:text-color-text-dark text-color-text-light' />
             ) : (
               <BsTelephoneInbound
                 className={`text-sm ${
-                  call_type !== 'answered' && ' text-color-accent'
+                  call_type !== 'answered'
+                    ? ' text-color-accent'
+                    : 'dark:text-color-text-dark text-color-text-light'
                 }`}
               />
             )}
-            <span>+{from}</span>
+            <span className='dark:text-color-text-dark text-color-text-light'>
+              +{from}
+            </span>
           </div>
         </div>
 
-        <div className='flex items-center gap-2 text-color-dark-grey'>
+        <div className='flex-2 flex items-center gap-2 text-color-dark-grey'>
           <HiOutlineEllipsisVertical />
           <span className='text-sm'>{formatDate(created_at)}</span>
           <div onClick={handleOnclick} className='flex items-center'>

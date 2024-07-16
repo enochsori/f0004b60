@@ -4,7 +4,6 @@ import { getActivities } from '../services/requests';
 import { useQuery } from '@tanstack/react-query';
 import { Activity } from '../services/types';
 
-import PopupButton from '../components/PopupButton';
 import ActivityCard from '../components/ActivityCard';
 import { CircularProgress } from '@mui/material';
 
@@ -37,7 +36,7 @@ export default function ArchiveFeed() {
   }, [activities]);
 
   return (
-    <div className='shared-container-style flex flex-col justify-between'>
+    <div className='shared-container-style flex flex-col justify-between hide-scrollbar overflow-auto'>
       <section>
         {isLoading && (
           <div className='mt-6 text-center '>
@@ -51,9 +50,6 @@ export default function ArchiveFeed() {
               <ActivityCard key={activity.id} activity={activity} />
             ))}
         </ul>
-      </section>
-      <section className='relative'>
-        <PopupButton />
       </section>
     </div>
   );

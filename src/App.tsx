@@ -7,6 +7,7 @@ import { DarkModeProvider } from './context/DarkModeContext';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
+import PopupButton from './components/PopupButton';
 
 const queryClient = new QueryClient();
 
