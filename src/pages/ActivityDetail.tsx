@@ -6,7 +6,6 @@ import { getCallDetail } from '../services/requests';
 import useActivityMutations from '../hooks/useActivity';
 import { formatDate } from '../services/dateFormatHook';
 
-import PopupButton from '../components/PopupButton';
 import {
   Box,
   Button,
