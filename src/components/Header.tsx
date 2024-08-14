@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { TbActivityHeartbeat } from 'react-icons/tb';
 import { MdInfoOutline } from 'react-icons/md';
 import { MdSdStorage } from 'react-icons/md';
+import { FaGithub } from 'react-icons/fa';
 
 export default function Header() {
   const [currentPage, setCurrentPage] = useState<'AF' | 'AD' | 'Arch.'>('AF');
@@ -21,7 +22,13 @@ export default function Header() {
   }, [location]);
 
   return (
-    <header className='h-[60px] p-2 dark:bg-bg-dark-dark bg-bg-light-dark rounded-t-md px-4 border-b dark:border-color-dark-grey border-color-light-grey flex justify-between'>
+    <header className='h-[60px] p-2 dark:bg-bg-dark-dark bg-bg-light-dark rounded-t-2xl px-4 border-b dark:border-color-dark-grey border-color-light-grey flex justify-between relative'>
+      <section className='absolute -top-10 right-2 opacity-60 hover:opacity-100'>
+        <a href='https://github.com/enochsori/f0004b60' target='_blank'>
+          <FaGithub className='text-2xl text-white' />
+        </a>
+      </section>
+
       <div className='hover:cursor-pointer' onClick={() => navigate('/')}>
         <svg
           className=''
